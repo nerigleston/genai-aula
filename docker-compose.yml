@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: gen-ai-backend
+    env_file: back/.env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: gen-ai-frontend
+    ports:
+      - "8501:8501"

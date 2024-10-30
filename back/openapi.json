@@ -1,0 +1,327 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API de IA",
+    "description": "API para realizar tradução, sumarização, geração de imagem e geração de código.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/traducao": {
+      "post": {
+        "summary": "Traducao",
+        "description": "Traduz o texto fornecido para o idioma de destino especificado. Ideal para adaptar conteúdos a diferentes idiomas e culturas.",
+        "operationId": "traducao_traducao_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado da tradução, retornando o texto no idioma desejado.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sumarizacao": {
+      "post": {
+        "summary": "Sumarizacao",
+        "description": "Gera uma sumarização do texto fornecido, capturando os pontos principais em um número máximo de tokens especificado. Útil para sintetizar informações longas.",
+        "operationId": "sumarizacao_sumarizacao_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SumarizacaoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Texto sumarizado, fornecendo uma versão condensada do conteúdo original.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geracao-imagem": {
+      "post": {
+        "summary": "Geracao Imagem",
+        "description": "Cria uma imagem com base em uma descrição textual. Perfeito para visualizar ideias ou conceitos a partir de descrições abstratas ou específicas.",
+        "operationId": "geracao_imagem_geracao_imagem_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImagemEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "URL ou dados da imagem gerada, com base na descrição fornecida.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geracao-codigo": {
+      "post": {
+        "summary": "Geracao Codigo",
+        "description": "Gera um trecho de código para realizar uma tarefa específica, descrita em linguagem natural. Ideal para automatizar partes de desenvolvimento com base em instruções descritivas.",
+        "operationId": "geracao_codigo_geracao_codigo_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodigoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Código gerado que atende à descrição da tarefa fornecida.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imagem-para-texto": {
+      "post": {
+        "summary": "Imagem Para Texto",
+        "description": "Converte uma imagem em texto, permitindo a extração de informações de imagens para análise ou processamento posterior.",
+        "operationId": "imagem_para_texto_imagem_para_texto_post",
+        "parameters": [
+          {
+            "name": "user_input",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "User Input"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_imagem_para_texto_imagem_para_texto_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Texto extraído da imagem fornecida.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conhecimentos": {
+      "post": {
+        "summary": "Conhecimentos Gerais",
+        "description": "Responde a perguntas de conhecimentos gerais com base em um texto fornecido. Ideal para responder a perguntas sobre uma ampla variedade de tópicos.",
+        "operationId": "conhecimentos_gerais_conhecimentos_get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta à pergunta de conhecimentos gerais, com base no texto fornecido.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "TextoEntrada": {
+        "properties": {
+          "texto": {
+            "type": "string",
+            "title": "Texto"
+          },
+          "max_tokens": {
+            "type": "integer",
+            "title": "Max Tokens",
+            "default": 500
+          },
+          "text_pdf": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Pdf"
+          },
+          "file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": ["texto"],
+        "title": "TextoEntrada"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
