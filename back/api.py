@@ -63,9 +63,16 @@ async def rota(request: TextoEntrada):
     include_in_schema=False
 )
 async def traducao(request: TextoEntrada):
-    texto = f"'texto': {request.texto}, 'text_pdf': {request.text_pdf}"
-    idioma = dectectar_idioma(request.texto)
-    resultado = realizar_traducao(request.texto, idioma)
+    user_input = request.texto
+
+    text_pdf = request.text_pdf
+
+    idioma = dectectar_idioma(user_input)
+
+    if text_pdf:
+        user_input = f"'texto': {user_input}, 'text_pdf': {text_pdf}"
+
+    resultado = realizar_traducao(user_input, idioma)
     return {"response": resultado}
 
 @app.post(
@@ -125,6 +132,11 @@ async def imagem_para_texto(request: TextoEntrada):
 )
 async def conhecimentos_gerais(request: TextoEntrada):
     user_input = request.texto
+
+    text_pdf = request.text_pdf
+
+    if text_pdf:
+        user_input = f"'texto': {user_input}, 'text_pdf': {text_pdf}"
 
     resultado = realizar_responder_pergunta(user_input)
 

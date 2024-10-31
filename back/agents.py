@@ -70,10 +70,6 @@ def agente_traducao(texto, idioma):
     prompt = PromptTemplate.from_template(f'''
         Traduza o seguinte texto para {idioma}: {texto}
         Sempre retorne da seguinte forma:
-        idioma original:\n
-        texto original\n
-        --------------------------------\n
-        idioma traduzido:\n
         texto traduzido
     ''')
     resposta = llm_google.invoke([{"role": "user", "content": prompt.format(idioma=idioma, texto=texto)}])
