@@ -102,12 +102,12 @@ def agente_geracao_imagem(descricao):
     response.raise_for_status()
     return response.json()
 
-def agente_geracao_codigo(descricao_tarefa):
+def agente_geracao_codigo(descricao):
     prompt = PromptTemplate.from_template(f'''
         Você é um desenvolvedor de software e precisa escrever um código para a seguinte tarefa: {descricao}.
         Escreva o código que resolve o problema.
     ''')
-    resposta = llm_google.invoke([{"role": "user", "content": prompt.format(descricao=descricao_tarefa)}])
+    resposta = llm_google.invoke([{"role": "user", "content": prompt.format(descricao=descricao)}])
     return resposta.content
 
 def agente_imagem_para_texto(file, user_input):

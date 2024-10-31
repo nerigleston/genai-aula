@@ -26,6 +26,8 @@ app = FastAPI(
     tags=["IA"],
 )
 async def rota(request: TextoEntrada):
+    extract_info = None
+
     if request.file:
         selected_route = '/imagem-para-texto'
         return await imagem_para_texto(request)

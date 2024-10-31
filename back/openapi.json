@@ -120,7 +120,7 @@
     "/geracao-codigo": {
       "post": {
         "summary": "Geracao Codigo",
-        "description": "Gera um trecho de código para realizar uma tarefa específica, descrita em linguagem natural. Ideal para automatizar partes de desenvolvimento com base em instruções descritivas.",
+        "description": "Criar ou gerar códigos em diferentes linguagens de programação, com base em uma descrição textual. Útil para acelerar o desenvolvimento de software, automatizar tarefas ou gerar exemplos de código.",
         "operationId": "geracao_codigo_geracao_codigo_post",
         "requestBody": {
           "content": {
